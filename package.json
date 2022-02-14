@@ -1,0 +1,35 @@
+{
+  "name": "@renatonascalves/bp-hooks",
+  "version": "1.0.0",
+  "description": "All the actions and filters from BuddyPress core in machine-readable JSON format.",
+  "homepage": "https://github.com/renatonascalves/bp-hooks#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/renatonascalves/bp-hooks.git"
+  },
+  "keywords": [
+    "wordpress",
+    "buddypress",
+    "bp"
+  ],
+  "author": "Renato Alves",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/renatonascalves/bp-hooks/issues"
+  },
+  "files": [
+    "hooks",
+    "interface",
+    "readme.md"
+  ],
+  "devDependencies": {
+    "ajv-cli": "^3.3.0"
+  },
+  "scripts": {
+    "check": "npm run validate:actions && npm run validate:filters && npm run check:duplicate-actions && npm run check:duplicate-filters",
+    "check:duplicate-actions": "bash -c \" diff <(jq '.hooks | map(.name) | sort' hooks/actions.json) <(jq '.hooks | map(.name) | unique | sort' hooks/actions.json)\"",
+    "check:duplicate-filters": "bash -c \" diff <(jq '.hooks | map(.name) | sort' hooks/filters.json) <(jq '.hooks | map(.name) | unique | sort' hooks/filters.json)\"",
+    "validate:actions": "ajv validate -s hooks/schema.json -d hooks/actions.json",
+    "validate:filters": "ajv validate -s hooks/schema.json -d hooks/filters.json"
+  }
+}

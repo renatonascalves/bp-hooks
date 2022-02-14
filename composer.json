@@ -1,0 +1,46 @@
+{
+  "name": "renatonascalves/bp-hooks",
+  "description": "All the actions and filters from BuddyPress core in machine-readable JSON format.",
+  "type": "library",
+  "license": "GPL-3.0-or-later",
+  "authors": [
+		{
+			"name": "Renato Alves",
+			"homepage": "https://ralv.es"
+		}
+	],
+  "config": {
+    "sort-packages": true,
+    "allow-plugins": {
+      "composer/installers": true,
+      "oomphinc/composer-installers-extender": true
+    }
+  },
+  "scripts": {
+    "generate": "wp-hooks-generator --input=wp-content/plugins/buddypress --output=hooks"
+  },
+  "scripts-descriptions": {
+    "generate": "Generates the hook files for BuddyPress core"
+  },
+  "require-dev": {
+		"erusev/parsedown": "1.8.0-beta-7",
+    "johnbillion/wp-hooks-generator": "0.7.3",
+    "oomphinc/composer-installers-extender": "^2",
+    "buddypress/buddypress": "10.0.0"
+  },
+  "minimum-stability": "dev",
+  "extra": {
+    "buddypress-install-dir": "wp-content/plugins/buddypress",
+    "wp-hooks": {
+      "ignore-files": [
+        "bp-core/deprecated/"
+      ],
+      "ignore-hooks": [
+        "{$filter}",
+        "{$action}",
+        "{$hook}",
+        "{$hook_name}"
+      ]
+    }
+  }
+}
